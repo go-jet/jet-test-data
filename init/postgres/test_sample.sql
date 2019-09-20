@@ -3,7 +3,7 @@
 
 create schema IF NOT EXISTS test_sample;
 
-DROP TABLE IF EXISTS test_sample.all_types;
+DROP TABLE IF EXISTS test_sample.all_types CASCADE;
 
 CREATE TABLE test_sample.ALL_TYPES
 (
@@ -237,3 +237,67 @@ CREATE TABLE test_sample."WEIRD NAMES TABLE"(
 
 INSERT INTO test_sample."WEIRD NAMES TABLE"
 VALUES ('Doe', 'Doe', 'Doe', 'Doe','Doe', 'Doe', 'Doe', 'Doe','Doe', 'Doe', 'Doe', 'Doe','Doe', 'Doe', 'Doe', 'Doe');
+
+CREATE OR REPLACE VIEW test_sample.all_types_view AS
+SELECT all_types.small_int_ptr AS "small_int_ptr",
+       all_types.small_int AS "small_int",
+       all_types.integer_ptr AS "integer_ptr",
+       all_types.integer AS "integer",
+       all_types.big_int_ptr AS "big_int_ptr",
+       all_types.big_int AS "big_int",
+       all_types.decimal_ptr AS "decimal_ptr",
+       all_types.decimal AS "decimal",
+       all_types.numeric_ptr AS "numeric_ptr",
+       all_types.numeric AS "numeric",
+       all_types.real_ptr AS "real_ptr",
+       all_types.real AS "real",
+       all_types.double_precision_ptr AS "double_precision_ptr",
+       all_types.double_precision AS "double_precision",
+       all_types.smallserial AS "smallserial",
+       all_types.serial AS "serial",
+       all_types.bigserial AS "bigserial",
+       all_types.var_char_ptr AS "var_char_ptr",
+       all_types.var_char AS "var_char",
+       all_types.char_ptr AS "char_ptr",
+       all_types.char AS "char",
+       all_types.text_ptr AS "text_ptr",
+       all_types.text AS "text",
+       all_types.bytea_ptr AS "bytea_ptr",
+       all_types.bytea AS "bytea",
+       all_types.timestampz_ptr AS "timestampz_ptr",
+       all_types.timestampz AS "timestampz",
+       all_types.timestamp_ptr AS "timestamp_ptr",
+       all_types.timestamp AS "timestamp",
+       all_types.date_ptr AS "date_ptr",
+       all_types.date AS "date",
+       all_types.timez_ptr AS "timez_ptr",
+       all_types.timez AS "timez",
+       all_types.time_ptr AS "time_ptr",
+       all_types.time AS "time",
+       all_types.interval_ptr AS "interval_ptr",
+       all_types.interval AS "interval",
+       all_types.boolean_ptr AS "boolean_ptr",
+       all_types.boolean AS "boolean",
+       all_types.point_ptr AS "point_ptr",
+       all_types.bit_ptr AS "bit_ptr",
+       all_types.bit AS "bit",
+       all_types.bit_varying_ptr AS "bit_varying_ptr",
+       all_types.bit_varying AS "bit_varying",
+       all_types.tsvector_ptr AS "tsvector_ptr",
+       all_types.tsvector AS "tsvector",
+       all_types.uuid_ptr AS "uuid_ptr",
+       all_types.uuid AS "uuid",
+       all_types.xml_ptr AS "xml_ptr",
+       all_types.xml AS "xml",
+       all_types.json_ptr AS "json_ptr",
+       all_types.json AS "json",
+       all_types.jsonb_ptr AS "jsonb_ptr",
+       all_types.jsonb AS "jsonb",
+       all_types.integer_array_ptr AS "integer_array_ptr",
+       all_types.integer_array AS "integer_array",
+       all_types.text_array_ptr AS "text_array_ptr",
+       all_types.text_array AS "text_array",
+       all_types.jsonb_array AS "jsonb_array",
+       all_types.text_multi_dim_array_ptr AS "text_multi_dim_array_ptr",
+       all_types.text_multi_dim_array AS "text_multi_dim_array"
+FROM test_sample.all_types;
