@@ -207,7 +207,17 @@ INSERT INTO test_sample.person(person_id, first_name, last_name, "Mood") VALUES
      ('b68dbff5-a87d-11e9-a7f2-98ded00c39c7', 'Ok', 'John', 'ok'),
      ('b68dbff6-a87d-11e9-a7f2-98ded00c39c8', 'Ok', 'John', 'ok');
 
+CREATE TABLE test_sample.person_phone(
+    phone_id uuid NOT NULL PRIMARY KEY,
+    phone_number VARCHAR(255),
+    person_id uuid NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES test_sample.person(person_id)
+);
 
+INSERT INTO test_sample.person_phone(phone_id, phone_number, person_id) VALUES
+    ('02b61cc4-d500-4847-bd36-111eccbc7a51', '212-555-1211', 'b68dbff4-a87d-11e9-a7f2-98ded00c39c6'),
+    ('02b61cc4-d500-4847-bd36-111eccbc7a52', '212-555-1212', 'b68dbff6-a87d-11e9-a7f2-98ded00c39c8'),
+    ('02b61cc4-d500-4847-bd36-111eccbc7a53', '212-555-1213', 'b68dbff6-a87d-11e9-a7f2-98ded00c39c8');
 
 -- WEIRD TABLE NAMES --------------
 
