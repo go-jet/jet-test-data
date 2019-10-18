@@ -141,7 +141,7 @@ VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111
 
 -- Link table --------------------
 
-DROP TABLE IF EXISTS test_sample.link;
+DROP TABLE IF EXISTS test_sample.link CASCADE;
 
 CREATE TABLE IF NOT EXISTS test_sample.link (
     id serial PRIMARY KEY,
@@ -156,7 +156,7 @@ INSERT INTO test_sample.link (ID, url, name, description) VALUES
 
 -- Employee table ---------------
 
-DROP TABLE IF EXISTS test_sample.employee;
+DROP TABLE IF EXISTS test_sample.employee CASCADE;
 
 CREATE TABLE test_sample.employee (
   employee_id INT PRIMARY KEY,
@@ -192,8 +192,7 @@ DROP TYPE IF EXISTS test_sample.MOOD CASCADE;
 
 CREATE TYPE test_sample.MOOD AS ENUM ('sad', 'ok', 'happy');
 
-DROP TABLE IF EXISTS test_sample.person;
-
+DROP TABLE IF EXISTS test_sample.person CASCADE;
 
 CREATE TABLE test_sample.person(
     person_id uuid NOT NULL PRIMARY KEY,
@@ -206,6 +205,9 @@ INSERT INTO test_sample.person(person_id, first_name, last_name, "Mood") VALUES
      ('b68dbff4-a87d-11e9-a7f2-98ded00c39c6', 'Sad', 'John', 'sad'),
      ('b68dbff5-a87d-11e9-a7f2-98ded00c39c7', 'Ok', 'John', 'ok'),
      ('b68dbff6-a87d-11e9-a7f2-98ded00c39c8', 'Ok', 'John', 'ok');
+
+
+DROP TABLE IF EXISTS test_sample.person_phone CASCADE;
 
 CREATE TABLE test_sample.person_phone(
     phone_id uuid NOT NULL PRIMARY KEY,
@@ -221,7 +223,7 @@ INSERT INTO test_sample.person_phone(phone_id, phone_number, person_id) VALUES
 
 -- WEIRD TABLE NAMES --------------
 
-DROP TABLE IF EXISTS test_sample."WEIRD NAMES TABLE";
+DROP TABLE IF EXISTS test_sample."WEIRD NAMES TABLE" CASCADE;
 
 CREATE TABLE test_sample."WEIRD NAMES TABLE"(
     "weird_column_name1" varchar(100) NOT NULL,
