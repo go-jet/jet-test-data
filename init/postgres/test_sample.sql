@@ -313,3 +313,6 @@ SELECT all_types.small_int_ptr AS "small_int_ptr",
        all_types.text_multi_dim_array_ptr AS "text_multi_dim_array_ptr",
        all_types.text_multi_dim_array AS "text_multi_dim_array"
 FROM test_sample.all_types;
+
+DROP TYPE IF EXISTS test_sample.Level CASCADE;
+CREATE TYPE test_sample.Level AS ENUM ('1', '2', '3', '4', '5');
