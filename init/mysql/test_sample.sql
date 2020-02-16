@@ -223,3 +223,24 @@ SELECT all_types.boolean AS "boolean",
        all_types.json_ptr AS "json_ptr"
 FROM test_sample.all_types
 LIMIT 2;
+
+-- Reserved words for table and column names
+DROP TABLE IF EXISTS test_sample.user CASCADE;
+CREATE TABLE test_sample.user(
+    `column` varchar(100) NOT NULL,
+    `use` varchar(100) NOT NULL,
+    `ceil` varchar(100) NOT NULL,
+    `commit` varchar(100) NOT NULL,
+    `create` varchar(100) NOT NULL,
+    `default` varchar(100) NOT NULL,
+    `desc` varchar(100) NOT NULL,
+    `empty` varchar(100) NOT NULL,
+    `float` varchar(100) NOT NULL,
+    `join` varchar(100) NOT NULL,
+    `like` varchar(100) NOT NULL,
+    `max` varchar(100) NOT NULL,
+    `rank` varchar(100) NOT NULL
+);
+
+INSERT INTO test_sample.user
+VALUES('Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY', 'FLOAT', 'JOIN', 'LIKE', 'MAX', 'RANK');

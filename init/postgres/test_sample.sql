@@ -316,3 +316,24 @@ FROM test_sample.all_types;
 
 DROP TYPE IF EXISTS test_sample.Level CASCADE;
 CREATE TYPE test_sample.Level AS ENUM ('1', '2', '3', '4', '5');
+
+-- Reserved words for table and column names
+DROP TABLE IF EXISTS test_sample."User" CASCADE;
+CREATE TABLE test_sample."User"(
+        "column" varchar(100) NOT NULL,
+        "check" varchar(100) NOT NULL,
+        "ceil" varchar(100) NOT NULL,
+        "commit" varchar(100) NOT NULL,
+        "create" varchar(100) NOT NULL,
+        "default" varchar(100) NOT NULL,
+        "desc" varchar(100) NOT NULL,
+        "empty" varchar(100) NOT NULL,
+        "float" varchar(100) NOT NULL,
+        "join" varchar(100) NOT NULL,
+        "like" varchar(100) NOT NULL,
+        "max" varchar(100) NOT NULL,
+        "rank" varchar(100) NOT NULL
+);
+
+INSERT INTO test_sample."User"
+VALUES('Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY', 'FLOAT', 'JOIN', 'LIKE', 'MAX', 'RANK');
