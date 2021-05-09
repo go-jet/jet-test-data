@@ -337,3 +337,19 @@ CREATE TABLE test_sample."User"(
 
 INSERT INTO test_sample."User"
 VALUES('Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY', 'FLOAT', 'JOIN', 'LIKE', 'MAX', 'RANK');
+
+DROP TABLE IF EXISTS test_sample.floats CASCADE;
+CREATE TABLE test_sample.floats
+(
+    decimal_ptr decimal(30, 20),
+    decimal decimal(30, 20) NOT NULL DEFAULT 0,
+    numeric_ptr numeric(30, 20),
+    numeric numeric(30, 20) NOT NULL DEFAULT 0,
+    real_ptr    real,
+    real        real NOT NULL DEFAULT 0,
+    double_ptr double precision,
+    double double precision NOT NULL DEFAULT 0
+);
+
+INSERT INTO test_sample.floats
+VALUES(NULL, '1.11111111111111111111', NULL, '2.22222222222222222222', NULL, '3.333333333333333333', NULL, '4.44444444444444444444');
