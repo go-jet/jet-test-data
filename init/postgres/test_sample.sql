@@ -9,19 +9,19 @@ CREATE TABLE test_sample.ALL_TYPES
 (
     -- numeric
     small_int_ptr smallint,
-    small_int smallint NOT NULL,
+    small_int smallint NOT NULL DEFAULT 0,
     integer_ptr  integer,
-    integer integer NOT NULL,
+    integer integer NOT NULL DEFAULT 0,
     big_int_ptr   bigint,
-    big_int bigint NOT NULL,
+    big_int bigint NOT NULL DEFAULT 0,
     decimal_ptr decimal(10, 2),
-    decimal decimal(10, 2) NOT NULL,
+    decimal decimal(10, 2) NOT NULL DEFAULT 0,
     numeric_ptr numeric(20, 3),
-    numeric numeric(20,3) NOT NULL,
+    numeric numeric(20,3) NOT NULL DEFAULT 0,
     real_ptr    real,
-    real        real NOT NULL,
+    real        real NOT NULL DEFAULT 0,
     double_precision_ptr double precision,
-    double_precision double precision NOT NULL,
+    double_precision double precision NOT NULL DEFAULT 0,
     smallserial     smallserial NOT NULL,
     serial serial NOT NULL,
     bigserial bigserial NOT NULL,
@@ -31,69 +31,69 @@ CREATE TABLE test_sample.ALL_TYPES
 --     money     money NOT NULL,
 
     var_char_ptr character varying(100),
-    var_char character varying(200) NOT NULL,
+    var_char character varying(200) NOT NULL DEFAULT 0,
     char_ptr character(80),
-    char character(80) NOT NULL,
+    char character(80) NOT NULL DEFAULT 0,
     text_ptr text,
-    text text NOT NULL,
+    text text NOT NULL DEFAULT 0,
 
     --binary
     bytea_ptr bytea,
-    bytea bytea NOT NULL,
+    bytea bytea NOT NULL DEFAULT '',
 
     --datetime
     timestampz_ptr timestamp with time zone,
-    timestampz timestamp with time zone NOT NULL,
+    timestampz timestamp with time zone NOT NULL DEFAULT now(),
     timestamp_ptr timestamp without time zone,
-    timestamp timestamp without time zone NOT NULL,
+    timestamp timestamp without time zone NOT NULL DEFAULT now(),
     date_ptr date,
-    date date NOT NULL,
+    date date NOT NULL DEFAULT now(),
     timez_ptr time with time zone,
-    timez time with time zone NOT NULL,
+    timez time with time zone NOT NULL DEFAULT now(),
     time_ptr time without time zone,
-    time time without time zone NOT NULL,
+    time time without time zone NOT NULL DEFAULT now(),
     interval_ptr interval,
-    interval interval NOT NULL,
+    interval interval NOT NULL DEFAULT '1 hour',
 
     --boolean
     boolean_ptr boolean,
-    boolean boolean NOT NULL,
+    boolean boolean NOT NULL DEFAULT false,
 
     --geometry
     point_ptr point,
 
     --bitstrings
     bit_ptr bit(3),
-    bit bit(3) NOT NULL,
+    bit bit(3) NOT NULL DEFAULT '000',
     bit_varying_ptr bit varying(20),
-    bit_varying bit varying(40) NOT NULL,
+    bit_varying bit varying(40) NOT NULL DEFAULT '',
 
     --textsearch
     tsvector_ptr tsvector,
-    tsvector tsvector NOT NULL,
+    tsvector tsvector NOT NULL DEFAULT '',
 
     --uuid
     uuid_ptr uuid,
-    uuid uuid NOT NULL,
+    uuid uuid NOT NULL DEFAULT '00000000-00000000-00000000-00000000',
 
     --xml
     xml_ptr xml,
-    xml xml NOT NULL,
+    xml xml NOT NULL DEFAULT '',
 
     --json
     json_ptr json,
-    json json NOT NULL,
+    json json NOT NULL DEFAULT '{}',
     jsonb_ptr jsonb,
-    jsonb jsonb NOT NULL,
+    jsonb jsonb NOT NULL DEFAULT '{}',
 
     --array
     integer_array_ptr integer[],
-    integer_array     integer[] NOT NULL,
+    integer_array     integer[] NOT NULL DEFAULT array[]::integer[],
     text_array_ptr    text[],
-    text_array        text[] NOT NULL,
-    jsonb_array       jsonb[] NOT NULL,
+    text_array        text[] NOT NULL DEFAULT array[]::text[],
+    jsonb_array       jsonb[] NOT NULL DEFAULT array[]::jsonb[],
     text_multi_dim_array_ptr text[][],
-    text_multi_dim_array text[][] NOT NULL
+    text_multi_dim_array text[][] NOT NULL DEFAULT array[]::text[]
 );
 
 INSERT INTO test_sample.ALL_types(
