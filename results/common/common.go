@@ -5,6 +5,9 @@ type ExpressionTestResult struct {
 	IsNotNull   *bool
 	In          *bool
 	InSelect    *bool
+	Raw         *string
+	RawArg      *int32
+	RawArg2     *int32
 	NotIn       *bool
 	NotInSelect *bool
 }
