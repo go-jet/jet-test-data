@@ -5,25 +5,29 @@
 -- Table structure for table `all_types8`
 --
 
+DROP DATABASE IF EXISTS test_sample;
+CREATE DATABASE test_sample;
+USE test_sample;
+
 DROP TABLE IF EXISTS `all_types`;
 
 CREATE TABLE `all_types` (
-    `boolean` BOOLEAN NOT NULL DEFAULT FALSE,
-    `boolean_ptr` BOOLEAN,
+                             `boolean` BOOLEAN NOT NULL DEFAULT FALSE,
+                             `boolean_ptr` BOOLEAN,
 
-    `tiny_int` TINYINT NOT NULL DEFAULT 0,
-    `u_tiny_int` TINYINT unsigned NOT NULL DEFAULT 0,
+                             `tiny_int` TINYINT NOT NULL DEFAULT 0,
+                             `u_tiny_int` TINYINT unsigned NOT NULL DEFAULT 0,
 
-    `small_int` SMALLINT NOT NULL DEFAULT 0,
-    `u_small_int` SMALLINT unsigned NOT NULL DEFAULT 0,
+                             `small_int` SMALLINT NOT NULL DEFAULT 0,
+                             `u_small_int` SMALLINT unsigned NOT NULL DEFAULT 0,
 
-    `medium_int` MEDIUMINT NOT NULL DEFAULT 0,
-    `u_medium_int` MEDIUMINT unsigned NOT NULL DEFAULT 0,
+                             `medium_int` MEDIUMINT NOT NULL DEFAULT 0,
+                             `u_medium_int` MEDIUMINT unsigned NOT NULL DEFAULT 0,
 
-    `integer` INT NOT NULL DEFAULT 0,
-    `u_integer` INT unsigned NOT NULL DEFAULT 0,
+                             `integer` INT NOT NULL DEFAULT 0,
+                             `u_integer` INT unsigned NOT NULL DEFAULT 0,
 
-    `big_int` bigint(20) NOT NULL DEFAULT 0,
+                             `big_int` bigint(20) NOT NULL DEFAULT 0,
     `u_big_int` bigint(20) unsigned NOT NULL DEFAULT 0,
 
 -- ptr
@@ -76,7 +80,7 @@ CREATE TABLE `all_types` (
     `date_time_ptr` datetime,
 
     `timestamp` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00',
-    `timestamp_ptr` timestamp,
+    `timestamp_ptr` timestamp NULL,
 
     `year` year NOT NULL DEFAULT 2000,
     `year_ptr` year,
@@ -142,7 +146,7 @@ CREATE TABLE IF NOT EXISTS test_sample.link (
 );
 
 INSERT INTO test_sample.link (ID, url, name, description) VALUES
-(0, 'http://www.youtube.com', 'Youtube' , '');
+    (0, 'http://www.youtube.com', 'Youtube' , '');
 
 -- Link2 table --------------------
 
@@ -156,7 +160,7 @@ CREATE TABLE IF NOT EXISTS test_sample.link2 (
 );
 
 INSERT INTO test_sample.link2 (ID, url, name, description) VALUES
-(0, 'http://www.youtube.com', 'Youtube' , '');
+    (0, 'http://www.youtube.com', 'Youtube' , '');
 
 CREATE OR REPLACE VIEW test_sample.all_types_view AS
 SELECT all_types.boolean AS "boolean",
