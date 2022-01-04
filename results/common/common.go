@@ -19,6 +19,8 @@ type EqualityExpResult struct {
 	Distinct2    *bool
 	NotDistinct1 *bool
 	NotDistinct2 *bool
+	Between      *bool
+	NotBetween   *bool
 	Lt1          *bool
 	Lt2          *bool
 	Lte1         *bool
@@ -70,6 +72,8 @@ type FloatExpressionTestResult struct {
 	Lt2          *bool
 	Gt1          *bool
 	Gt2          *bool
+	Between      *bool
+	NotBetween   *bool
 	Add1         *float64
 	Add2         *float64
 	Sub1         *float64
