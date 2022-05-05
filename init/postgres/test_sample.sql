@@ -144,15 +144,24 @@ VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111
 DROP TABLE IF EXISTS test_sample.link CASCADE;
 
 CREATE TABLE IF NOT EXISTS test_sample.link (
-    id serial PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     url VARCHAR (255) NOT NULL,
     name VARCHAR (255) NOT NULL,
     description VARCHAR (255)
 );
 
-INSERT INTO test_sample.link (ID, url, name, description) VALUES
- (0, 'http://www.youtube.com', 'Youtube' , '');
+INSERT INTO test_sample.link (id, url, name, description) VALUES
+    (0, 'http://www.youtube.com', 'Youtube' , ''),
+    (1, 'www.gmail.com', 'Gmail', 'Email service developed by Google'),
+    (2, 'www.outlook.live.com', 'Outlook', 'Email service developed by Microsoft'),
+    (200, 'http://www.postgresqltutorial.com', 'PostgreSQL Tutorial', DEFAULT),
+    (201, 'http://www.ask.com', 'Ask', DEFAULT),
+    (202, 'http://www.ask.com', 'Ask', DEFAULT),
+    (203, 'http://www.yahoo.com', 'Yahoo', DEFAULT),
+    (204, 'http://www.bing.com', 'Bing', DEFAULT);
 
+-- fix for https://stackoverflow.com/questions/4448340/postgresql-duplicate-key-violates-unique-constraint
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('test_sample.link', 'id')), (SELECT (MAX(id) + 1) FROM test_sample.link), FALSE);
 
 -- Employee table ---------------
 
@@ -320,6 +329,7 @@ CREATE TYPE test_sample.Level AS ENUM ('1', '2', '3', '4', '5');
 -- Reserved words for table and column names
 DROP TABLE IF EXISTS test_sample."User" CASCADE;
 CREATE TABLE test_sample."User"(
+        id bigserial PRIMARY KEY,
         "column" varchar(100) NOT NULL,
         "check" varchar(100) NOT NULL,
         "ceil" varchar(100) NOT NULL,
@@ -336,11 +346,12 @@ CREATE TABLE test_sample."User"(
 );
 
 INSERT INTO test_sample."User"
-VALUES('Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY', 'FLOAT', 'JOIN', 'LIKE', 'MAX', 'RANK');
+VALUES(0, 'Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY', 'FLOAT', 'JOIN', 'LIKE', 'MAX', 'RANK');
 
 DROP TABLE IF EXISTS test_sample.floats CASCADE;
 CREATE TABLE test_sample.floats
 (
+    id bigserial PRIMARY KEY,
     decimal_ptr decimal(30, 20),
     decimal decimal(30, 20) NOT NULL DEFAULT 0,
     numeric_ptr numeric(30, 20),
@@ -352,4 +363,4 @@ CREATE TABLE test_sample.floats
 );
 
 INSERT INTO test_sample.floats
-VALUES(NULL, '1.11111111111111111111', NULL, '2.22222222222222222222', NULL, '3.333333333333333333', NULL, '4.44444444444444444444');
+VALUES(0, NULL, '1.11111111111111111111', NULL, '2.22222222222222222222', NULL, '3.333333333333333333', NULL, '4.44444444444444444444');

@@ -12,23 +12,23 @@ USE test_sample;
 DROP TABLE IF EXISTS `all_types`;
 
 CREATE TABLE `all_types` (
-                             `boolean` BOOLEAN NOT NULL DEFAULT FALSE,
-                             `boolean_ptr` BOOLEAN,
+     `boolean` BOOLEAN NOT NULL DEFAULT FALSE,
+     `boolean_ptr` BOOLEAN,
 
-                             `tiny_int` TINYINT NOT NULL DEFAULT 0,
-                             `u_tiny_int` TINYINT unsigned NOT NULL DEFAULT 0,
+     `tiny_int` TINYINT NOT NULL DEFAULT 0,
+     `u_tiny_int` TINYINT unsigned NOT NULL DEFAULT 0,
 
-                             `small_int` SMALLINT NOT NULL DEFAULT 0,
-                             `u_small_int` SMALLINT unsigned NOT NULL DEFAULT 0,
+     `small_int` SMALLINT NOT NULL DEFAULT 0,
+     `u_small_int` SMALLINT unsigned NOT NULL DEFAULT 0,
 
-                             `medium_int` MEDIUMINT NOT NULL DEFAULT 0,
-                             `u_medium_int` MEDIUMINT unsigned NOT NULL DEFAULT 0,
+     `medium_int` MEDIUMINT NOT NULL DEFAULT 0,
+     `u_medium_int` MEDIUMINT unsigned NOT NULL DEFAULT 0,
 
-                             `integer` INT NOT NULL DEFAULT 0,
-                             `u_integer` INT unsigned NOT NULL DEFAULT 0,
+     `integer` INT NOT NULL DEFAULT 0,
+     `u_integer` INT unsigned NOT NULL DEFAULT 0,
 
-                             `big_int` bigint(20) NOT NULL DEFAULT 0,
-    `u_big_int` bigint(20) unsigned NOT NULL DEFAULT 0,
+     `big_int` bigint(20) NOT NULL DEFAULT 0,
+     `u_big_int` bigint(20) unsigned NOT NULL DEFAULT 0,
 
 -- ptr
 
@@ -139,14 +139,22 @@ INSERT INTO `all_types` VALUES
 DROP TABLE IF EXISTS test_sample.link;
 
 CREATE TABLE IF NOT EXISTS test_sample.link (
-                                                id int PRIMARY KEY AUTO_INCREMENT,
-                                                url VARCHAR (255) NOT NULL,
-                                                name VARCHAR (255) NOT NULL,
-                                                description VARCHAR (255)
+    id int AUTO_INCREMENT PRIMARY KEY,
+    url VARCHAR (255) NOT NULL,
+    name VARCHAR (255) NOT NULL,
+    description VARCHAR (255)
 );
 
-INSERT INTO test_sample.link (ID, url, name, description) VALUES
-    (0, 'http://www.youtube.com', 'Youtube' , '');
+INSERT INTO test_sample.link (id, url, name, description) VALUES
+      (1, 'http://www.youtube.com', 'Youtube' , ''),
+      (2, 'www.gmail.com', 'Gmail', 'Email service developed by Google'),
+      (3, 'www.outlook.live.com', 'Outlook', 'Email service developed by Microsoft'),
+      (200, 'http://www.postgresqltutorial.com', 'PostgreSQL Tutorial', DEFAULT),
+      (201, 'http://www.ask.com', 'Ask', DEFAULT),
+      (202, 'http://www.ask.com', 'Ask', DEFAULT),
+      (203, 'http://www.yahoo.com', 'Yahoo', DEFAULT),
+      (204, 'http://www.bing.com', 'Bing', DEFAULT);
+
 
 -- Link2 table --------------------
 
