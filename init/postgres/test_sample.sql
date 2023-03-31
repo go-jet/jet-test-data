@@ -364,3 +364,19 @@ CREATE TABLE test_sample.floats
 
 INSERT INTO test_sample.floats
 VALUES(0, NULL, '1.11111111111111111111', NULL, '2.22222222222222222222', NULL, '3.333333333333333333', NULL, '4.44444444444444444444');
+
+-- Generated column
+
+DROP TABLE IF EXISTS test_sample.people CASCADE;
+CREATE TABLE test_sample.people
+(
+    people_id        serial primary key,
+    people_name      varchar(15) NOT NULL,
+    people_height_cm numeric,
+    people_height_in numeric GENERATED ALWAYS AS ((people_height_cm / 2.54)) STORED
+);
+
+INSERT INTO test_sample.people (people_name, people_height_cm) VALUES
+    ('Alfredo', 170),
+    ('Bob', null),
+    ('Carla', 155);
