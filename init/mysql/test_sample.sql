@@ -139,10 +139,10 @@ INSERT INTO `all_types` VALUES
 DROP TABLE IF EXISTS test_sample.link;
 
 CREATE TABLE IF NOT EXISTS test_sample.link (
-    id int AUTO_INCREMENT PRIMARY KEY,
-    url VARCHAR (255) NOT NULL,
-    name VARCHAR (255) NOT NULL,
-    description VARCHAR (255)
+    id int AUTO_INCREMENT PRIMARY KEY COMMENT "this is link id",
+    url VARCHAR (255) NOT NULL COMMENT "link url",
+    name VARCHAR (255) NOT NULL COMMENT "link name",
+    description VARCHAR (255) COMMENT "this is link description"
 );
 
 INSERT INTO test_sample.link (id, url, name, description) VALUES
@@ -161,10 +161,10 @@ INSERT INTO test_sample.link (id, url, name, description) VALUES
 DROP TABLE IF EXISTS test_sample.link2;
 
 CREATE TABLE IF NOT EXISTS test_sample.link2 (
-                                                 id int PRIMARY KEY AUTO_INCREMENT,
-                                                 url VARCHAR (255) NOT NULL,
-                                                 name VARCHAR (255) NOT NULL,
-                                                 description VARCHAR (255)
+    id int PRIMARY KEY AUTO_INCREMENT,
+    url VARCHAR (255) NOT NULL,
+    name VARCHAR (255) NOT NULL,
+    description VARCHAR (255)
 );
 
 INSERT INTO test_sample.link2 (ID, url, name, description) VALUES
