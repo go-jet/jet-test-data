@@ -22,11 +22,19 @@ SET search_path TO chinook;
 /*******************************************************************************
    Create Tables
 ********************************************************************************/
+CREATE TYPE "AlbumType" AS ENUM
+(
+    'Studio',
+    'Live',
+    'Solo'
+);
+
 CREATE TABLE "Album"
 (
     "AlbumId" INT4 NOT NULL,
     "Title" VARCHAR(160) NOT NULL,
     "ArtistId" INT4 NOT NULL,
+    "Type" "AlbumType" NOT NULL DEFAULT 'Studio',
     CONSTRAINT "PK_Album" PRIMARY KEY  ("AlbumId")
 );
 
