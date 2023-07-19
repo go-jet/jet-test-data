@@ -1,7 +1,8 @@
 
 -- AllTypes table -----------------------------
 
-create schema IF NOT EXISTS test_sample;
+DROP SCHEMA IF EXISTS test_sample CASCADE;
+CREATE SCHEMA test_sample;
 
 DROP TABLE IF EXISTS test_sample.all_types CASCADE;
 
@@ -380,3 +381,30 @@ INSERT INTO test_sample.people (people_name, people_height_cm) VALUES
     ('Alfredo', 170),
     ('Bob', null),
     ('Carla', 155);
+
+
+--
+
+DROP TABLE IF EXISTS test_sample.components cascade;
+
+CREATE TABLE test_sample.components (
+    id text primary key,
+    parent_id text,
+    FOREIGN KEY (parent_id) REFERENCES test_sample.components (id)
+);
+
+INSERT INTO test_sample.components VALUES
+    ('component_00', null), ('component_01', 'component_00'), ('component_02', 'component_00');
+
+DROP TABLE IF EXISTS test_sample.vulnerabilities cascade;
+
+CREATE TABLE test_sample.vulnerabilities (
+    id text primary key,
+    components_id text,
+    FOREIGN KEY (components_id) REFERENCES test_sample.components(id)
+);
+
+INSERT INTO test_sample.vulnerabilities VALUES
+    ('vulnerability_00', 'component_00'),('vulnerability_01', 'component_00'),('vulnerability_02', 'component_00'),('vulnerability_03', 'component_00'),
+    ('vulnerability_11', 'component_01'),('vulnerability_12', 'component_01'),
+    ('vulnerability_21', 'component_02');

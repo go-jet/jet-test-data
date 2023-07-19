@@ -1,7 +1,6 @@
 USE jetdb;
 
 DROP SCHEMA IF EXISTS test_sample cascade;
-
 CREATE SCHEMA IF NOT EXISTS  test_sample;
 
 -- AllTypes table -----------------------------
@@ -386,3 +385,30 @@ INSERT INTO test_sample.people (people_id, people_name, people_height_cm) VALUES
     (1, 'Alfredo', 170),
     (2, 'Bob', null),
     (3, 'Carla', 155);
+
+
+--
+
+DROP TABLE IF EXISTS test_sample.components cascade;
+
+CREATE TABLE test_sample.components (
+    id text primary key,
+    parent_id text,
+    FOREIGN KEY (parent_id) REFERENCES test_sample.components (id)
+);
+
+INSERT INTO test_sample.components VALUES
+    ('component_00', null), ('component_01', 'component_00'), ('component_02', 'component_00');
+
+DROP TABLE IF EXISTS test_sample.vulnerabilities cascade;
+
+CREATE TABLE test_sample.vulnerabilities (
+    id text primary key,
+    components_id text,
+    FOREIGN KEY (components_id) REFERENCES test_sample.components(id)
+);
+
+INSERT INTO test_sample.vulnerabilities VALUES
+    ('vulnerability_00', 'component_00'),('vulnerability_01', 'component_00'),('vulnerability_02', 'component_00'),('vulnerability_03', 'component_00'),
+    ('vulnerability_11', 'component_01'),('vulnerability_12', 'component_01'),
+    ('vulnerability_21', 'component_02');
