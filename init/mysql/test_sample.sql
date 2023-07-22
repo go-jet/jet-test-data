@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS test_sample.link (
     id int AUTO_INCREMENT PRIMARY KEY COMMENT "this is link id",
     url VARCHAR (255) NOT NULL COMMENT "link url",
     name VARCHAR (255) NOT NULL COMMENT "link name",
-    description VARCHAR (255) COMMENT "this is link description"
+    description VARCHAR (255) COMMENT '\0\'\"\b\n\r\t\Z\\\%\_'
 );
 
 INSERT INTO test_sample.link (id, url, name, description) VALUES
