@@ -141,7 +141,7 @@ DROP TABLE IF EXISTS test_sample.link;
 CREATE TABLE IF NOT EXISTS test_sample.link (
     id int AUTO_INCREMENT PRIMARY KEY COMMENT "this is link id",
     url VARCHAR (255) NOT NULL COMMENT "link url",
-    name VARCHAR (255) NOT NULL COMMENT "link name",
+    name VARCHAR (255) NOT NULL COMMENT "Unicode characters comment ₲鬼佬℧⇄↻",
     description VARCHAR (255) COMMENT '\0\'\"\b\n\r\t\Z\\\%\_'
 );
 
