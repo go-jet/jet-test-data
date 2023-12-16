@@ -110,7 +110,6 @@ INSERT INTO `ReservedWords`
 VALUES('Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY', 'FLOAT', 'JOIN', 'LIKE', 'MAX', 'RANK');
 
 DROP TABLE IF EXISTS exact_decimals;
-
 CREATE TABLE exact_decimals (
                                 `decimal` TEXT NOT NULL DEFAULT 0,
                                 `decimal_ptr` TEXT,
@@ -120,3 +119,19 @@ CREATE TABLE exact_decimals (
 
 INSERT INTO exact_decimals
 VALUES('1.11111111111111111111', NULL, '2.22222222222222222222', NULL);
+
+
+
+DROP TABLE IF EXISTS people;
+CREATE TABLE people
+(
+    people_id        INT primary key,
+    people_name      TEXT NOT NULL,
+    people_height_cm DOUBLE,
+    people_height_in REAL GENERATED ALWAYS AS ((people_height_cm / 2.54)) STORED
+);
+
+INSERT INTO people (people_id, people_name, people_height_cm) VALUES
+    (1, 'Alfredo', 170),
+    (2, 'Bob', null),
+    (3, 'Carla', 155);
