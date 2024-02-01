@@ -3,13 +3,11 @@ USE jetdb;
 DROP SCHEMA IF EXISTS test_sample cascade;
 CREATE SCHEMA IF NOT EXISTS  test_sample;
 
+-- enum
+CREATE TYPE test_sample.mood AS ENUM ('sad', 'ok', 'happy');
+
 -- AllTypes table -----------------------------
-
-create schema IF NOT EXISTS test_sample;
-
-DROP TABLE IF EXISTS test_sample.all_types CASCADE;
-
-CREATE TABLE test_sample.ALL_TYPES
+CREATE TABLE test_sample.all_types
 (
     -- numeric
     small_int_ptr smallint,
@@ -97,7 +95,11 @@ CREATE TABLE test_sample.ALL_TYPES
     text_array        text[] NOT NULL DEFAULT array[]::text[],
     jsonb_array       text NOT NULL DEFAULT '',
     text_multi_dim_array_ptr text,
-    text_multi_dim_array text NOT NULL DEFAULT ''
+    text_multi_dim_array text NOT NULL DEFAULT '',
+
+    -- enum
+    mood_ptr test_sample.mood,
+    mood test_sample.mood NOT NULL DEFAULT 'ok'
 );
 
 INSERT INTO test_sample.all_types(
@@ -113,7 +115,8 @@ INSERT INTO test_sample.all_types(
     uuid_ptr, uuid,
     xml_ptr, xml,
     json_ptr, json, jsonb_ptr, jsonb,
-    integer_array_ptr, integer_array, text_array_ptr, text_array, jsonb_array, text_multi_dim_array_ptr, text_multi_dim_array)
+    integer_array_ptr, integer_array, text_array_ptr, text_array, jsonb_array, text_multi_dim_array_ptr, text_multi_dim_array,
+    mood_ptr, mood)
 VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111111.22, 11111111.22, 1, 1, 1,
 --         100000, 100000,
         'ABBA', 'ABBA', 'JOHN', 'JOHN', 'Some text', 'Some text',
@@ -126,8 +129,10 @@ VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111
         'A0EEBC99-9C0B-4EF8-BB6D-6BB9BD380A11', 'A0EEBC99-9C0B-4EF8-BB6D-6BB9BD380A11',
         '<Sub>abc</Sub>', '<Sub>abc</Sub>',
         '{"a": 1, "b": 3}', '{"a": 1, "b": 3}', '{"a": 1, "b": 3}', '{"a": 1, "b": 3}',
-        '{1, 2, 3}', '{1, 2, 3}', '{"breakfast", "consulting"}', '{"breakfast", "consulting"}', '{"{\"a\": 1, \"b\": 2}","{\"a\": 3, \"b\": 4}"}', '{{meeting,lunch},{training,presentation}}', '{{meeting,lunch},{training,presentation}}')
-        ,
+        '{1, 2, 3}', '{1, 2, 3}', '{"breakfast", "consulting"}', '{"breakfast", "consulting"}', '{"{\"a\": 1, \"b\": 2}","{\"a\": 3, \"b\": 4}"}', '{{meeting,lunch},{training,presentation}}', '{{meeting,lunch},{training,presentation}}',
+        'sad', 'happy'
+       )
+       ,
        (NULL, 14, NULL, 300, NULL, 5000, NULL, 1.11, NULL, 2.22, NULL, 5.55, NULL, 11111111.22, 2, 2, 2,
 --         NULL, 100000,
         NULL, 'ABBA', NULL, 'JOHN', NULL, 'Some text',
@@ -140,10 +145,12 @@ VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111
         NULL, 'A0EEBC99-9C0B-4EF8-BB6D-6BB9BD380A11',
         NULL, '<Sub>abc</Sub>',
         NULL, '{"a": 1, "b": 3}', NULL, '{"a": 1, "b": 3}',
-        NULL, '{1, 2, 3}', NULL, '{"breakfast", "consulting"}', '{"{\"a\": 1, \"b\": 2}","{\"a\": 3, \"b\": 4}"}', NULL, '{{meeting,lunch},{training,presentation}}')
+        NULL, '{1, 2, 3}', NULL, '{"breakfast", "consulting"}', '{"{\"a\": 1, \"b\": 2}","{\"a\": 3, \"b\": 4}"}', NULL, '{{meeting,lunch},{training,presentation}}',
+        NULL, 'ok'
+        )
 ;
 
-
+-- View
 CREATE OR REPLACE VIEW test_sample.all_types_view AS
 SELECT all_types.small_int_ptr AS "small_int_ptr",
        all_types.small_int AS "small_int",
@@ -205,13 +212,18 @@ SELECT all_types.small_int_ptr AS "small_int_ptr",
        all_types.text_array AS "text_array",
        all_types.jsonb_array AS "jsonb_array",
        all_types.text_multi_dim_array_ptr AS "text_multi_dim_array_ptr",
-       all_types.text_multi_dim_array AS "text_multi_dim_array"
+       all_types.text_multi_dim_array AS "text_multi_dim_array",
+       all_types.mood_ptr AS "mood_ptr",
+       all_types.mood AS "mood"
+FROM test_sample.all_types;
+
+
+-- Materialized view
+CREATE MATERIALIZED VIEW test_sample.all_types_materialized_view AS
+SELECT *
 FROM test_sample.all_types;
 
 -- Link table --------------------
-
-DROP TABLE IF EXISTS test_sample.link CASCADE;
-
 CREATE TABLE IF NOT EXISTS test_sample.link (
     id BIGSERIAL PRIMARY KEY,
     url VARCHAR (255) NOT NULL,
@@ -231,8 +243,6 @@ INSERT INTO test_sample.link (ID, url, name, description) VALUES
 
 
 -- Employee table ---------------
-
-DROP TABLE IF EXISTS test_sample.employee CASCADE;
 
 CREATE TABLE test_sample.employee (
   employee_id INT4 PRIMARY KEY,
@@ -262,13 +272,7 @@ VALUES
 (8, 'Salley', 'Lester', '1999-01-08 04:05:06 +1:00', 3);
 
 
--- Person table ------------------
-
-DROP TYPE IF EXISTS test_sample.MOOD;
-
-CREATE TYPE test_sample.MOOD AS ENUM ('sad', 'ok', 'happy');
-
-DROP TABLE IF EXISTS test_sample.person CASCADE;
+-- Person/Person phone table (UUID used as grouping key) ------------------
 
 CREATE TABLE test_sample.person(
     person_id uuid NOT NULL PRIMARY KEY,
@@ -283,8 +287,6 @@ INSERT INTO test_sample.person(person_id, first_name, last_name, "Mood") VALUES
      ('b68dbff6-a87d-11e9-a7f2-98ded00c39c8', 'Ok', 'John', 'ok');
 
 
-DROP TABLE IF EXISTS test_sample.person_phone CASCADE;
-
 CREATE TABLE test_sample.person_phone(
     phone_id uuid NOT NULL PRIMARY KEY,
     phone_number VARCHAR(255),
@@ -298,8 +300,6 @@ INSERT INTO test_sample.person_phone(phone_id, phone_number, person_id) VALUES
     ('02b61cc4-d500-4847-bd36-111eccbc7a53', '212-555-1213', 'b68dbff6-a87d-11e9-a7f2-98ded00c39c8');
 
 -- WEIRD TABLE NAMES --------------
-
-DROP TABLE IF EXISTS test_sample."WEIRD NAMES TABLE" CASCADE;
 
 CREATE TABLE test_sample."WEIRD NAMES TABLE"(
     id bigserial PRIMARY KEY,
@@ -328,11 +328,9 @@ INSERT INTO test_sample."WEIRD NAMES TABLE"
 VALUES (0, 'Doe', 'Doe', 'Doe', 'Doe','Doe', 'Doe', 'Doe', 'Doe','Doe', 'Doe', 'Doe', 'Doe','Doe', 'Doe', 'Doe', 'Doe');
 
 
-DROP TYPE IF EXISTS test_sample.Level;
 CREATE TYPE test_sample.Level AS ENUM ('1', '2', '3', '4', '5');
 
 -- Reserved words for table and column names
-DROP TABLE IF EXISTS test_sample."User" CASCADE;
 CREATE TABLE test_sample."User"(
         id bigserial PRIMARY KEY,
         "column" varchar(100) NOT NULL,
@@ -353,7 +351,6 @@ CREATE TABLE test_sample."User"(
 INSERT INTO test_sample."User"
 VALUES(0, 'Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY', 'FLOAT', 'JOIN', 'LIKE', 'MAX', 'RANK');
 
-DROP TABLE IF EXISTS test_sample.floats CASCADE;
 CREATE TABLE test_sample.floats
 (
     id bigserial PRIMARY KEY,
@@ -372,7 +369,6 @@ VALUES(0, NULL, '1.11111111111111111111', NULL, '2.22222222222222222222', NULL, 
 
 -- Generated column
 
-DROP TABLE IF EXISTS test_sample.people;
 CREATE TABLE test_sample.people
 (
     people_id        serial primary key,
@@ -387,9 +383,7 @@ INSERT INTO test_sample.people (people_id, people_name, people_height_cm) VALUES
     (3, 'Carla', 155);
 
 
---
-
-DROP TABLE IF EXISTS test_sample.components cascade;
+-- components tables
 
 CREATE TABLE test_sample.components (
     id text primary key,
@@ -400,7 +394,6 @@ CREATE TABLE test_sample.components (
 INSERT INTO test_sample.components VALUES
     ('component_00', null), ('component_01', 'component_00'), ('component_02', 'component_00');
 
-DROP TABLE IF EXISTS test_sample.vulnerabilities cascade;
 
 CREATE TABLE test_sample.vulnerabilities (
     id text primary key,
