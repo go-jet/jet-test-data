@@ -125,10 +125,11 @@ VALUES('1.11111111111111111111', NULL, '2.22222222222222222222', NULL);
 DROP TABLE IF EXISTS people;
 CREATE TABLE people
 (
-    people_id        INT primary key,
-    people_name      TEXT NOT NULL,
-    people_height_cm DOUBLE,
-    people_height_in REAL GENERATED ALWAYS AS ((people_height_cm / 2.54)) STORED
+    people_id           INTEGER primary key AUTOINCREMENT NOT NULL,
+    people_name         TEXT NOT NULL,
+    people_height_cm    DOUBLE,
+    people_height_inch  REAL GENERATED ALWAYS AS ((people_height_cm / 2.54)) STORED,
+    people_height_feet  REAL GENERATED ALWAYS AS ((people_height_cm *0.032808399)) VIRTUAL
 );
 
 INSERT INTO people (people_id, people_name, people_height_cm) VALUES
