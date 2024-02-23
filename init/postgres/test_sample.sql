@@ -398,3 +398,16 @@ INSERT INTO test_sample.vulnerabilities VALUES
     ('vulnerability_00', 'component_00'),('vulnerability_01', 'component_00'),('vulnerability_02', 'component_00'),('vulnerability_03', 'component_00'),
     ('vulnerability_11', 'component_01'),('vulnerability_12', 'component_01'),
     ('vulnerability_21', 'component_02');
+
+--- Range fields table; contains all range types that currently supported
+CREATE TABLE test_sample.sample_ranges (
+      date_range daterange NOT NULL DEFAULT daterange('2024-01-01', '2024-01-10'),
+      timestamp_range tsrange NOT NULL DEFAULT tsrange('2024-01-01 00:00:00', '2024-01-10 00:00:00'),
+      timestampz_range tstzrange NOT NULL DEFAULT tstzrange('2024-01-01 00:00:00 +02', '2024-01-10 00:00:00 +02'),
+      int4_range int4range NOT NULL DEFAULT int4range(0, 10),
+      int8_range int8range NOT NULL DEFAULT int8range(0, 10),
+      num_range numrange NOT NULL DEFAULT numrange(0, 10)
+);
+
+INSERT INTO test_sample.sample_ranges (date_range, timestamp_range, timestampz_range, int4_range, int8_range, num_range)
+    VALUES ('[2023-09-25, 2024-02-10)','[2020-01-01 00:00:00, 2021-01-01 15:00:00]','[2024-05-07 17:00:00 +02,2024-10-11 16:00:00 +02)','[11,20)','[200,2450)','[2000,5000)');
