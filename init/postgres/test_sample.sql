@@ -100,15 +100,7 @@ CREATE TABLE test_sample.all_types
 
     -- enum
     mood_ptr test_sample.mood,
-    mood test_sample.mood NOT NULL DEFAULT 'ok',
-
-    -- range types
-    date_range daterange NOT NULL DEFAULT daterange('2024-01-01', '2024-01-10'),
-    timestamp_range tsrange NOT NULL DEFAULT tsrange('2024-01-01 00:00:00', '2024-01-10 00:00:00'),
-    timestampz_range tstzrange NOT NULL DEFAULT tstzrange('2024-01-01 00:00:00 +02', '2024-01-10 00:00:00 +02'),
-    int4_range int4range NOT NULL DEFAULT int4range(0, 10),
-    int8_range int8range NOT NULL DEFAULT int8range(0, 10),
-    num_range numrange NOT NULL DEFAULT numrange(0, 10)
+    mood test_sample.mood NOT NULL DEFAULT 'ok'
 );
 
 INSERT INTO test_sample.ALL_types(
@@ -125,7 +117,7 @@ INSERT INTO test_sample.ALL_types(
     xml_ptr, xml,
     json_ptr, json, jsonb_ptr, jsonb,
     integer_array_ptr, integer_array, text_array_ptr, text_array, jsonb_array, text_multi_dim_array_ptr, text_multi_dim_array,
-    mood_ptr, mood, date_range, timestamp_range, timestampz_range, int4_range, int8_range, num_range)
+    mood_ptr, mood)
 VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111111.22, 11111111.22, DEFAULT, DEFAULT, DEFAULT,
 --         100000, 100000,
         'ABBA', 'ABBA', 'JOHN', 'JOHN', 'Some text', 'Some text',
@@ -139,7 +131,7 @@ VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111
         '<Sub>abc</Sub>', '<Sub>abc</Sub>',
         '{"a": 1, "b": 3}', '{"a": 1, "b": 3}', '{"a": 1, "b": 3}', '{"a": 1, "b": 3}',
         '{1, 2, 3}', '{1, 2, 3}', '{"breakfast", "consulting"}', '{"breakfast", "consulting"}', ARRAY['{"a": 1, "b": 2}'::jsonb, '{"a":3, "b": 4}'::jsonb], '{{"meeting", "lunch"}, {"training", "presentation"}}', '{{"meeting", "lunch"}, {"training", "presentation"}}',
-        'sad', 'happy', daterange('2023-02-01', '2023-02-10'), DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT
+        'sad', 'happy'
        ),
        (NULL, 14, NULL, 300, NULL, 5000, NULL, 1.11, NULL, 2.22, NULL, 5.55, NULL, 11111111.22, DEFAULT, DEFAULT, DEFAULT,
 --         NULL, 100000,
@@ -154,7 +146,7 @@ VALUES (14, 14, 300, 300, 50000, 5000, 1.11, 1.11, 2.22, 2.22, 5.55, 5.55, 11111
         NULL, '<Sub>abc</Sub>',
         NULL, '{"a": 1, "b": 3}', NULL, '{"a": 1, "b": 3}',
         NULL, '{1, 2, 3}', NULL, '{"breakfast", "consulting"}', ARRAY['{"a": 1, "b": 2}'::jsonb, '{"a":3, "b": 4}'::jsonb], NULL, '{{"meeting", "lunch"}, {"training", "presentation"}}',
-        NULL, 'ok', daterange('2024-02-01', '2024-02-10'), DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT
+        NULL, 'ok'
        );
 
 -- Link table --------------------
@@ -406,3 +398,16 @@ INSERT INTO test_sample.vulnerabilities VALUES
     ('vulnerability_00', 'component_00'),('vulnerability_01', 'component_00'),('vulnerability_02', 'component_00'),('vulnerability_03', 'component_00'),
     ('vulnerability_11', 'component_01'),('vulnerability_12', 'component_01'),
     ('vulnerability_21', 'component_02');
+
+--- Range fields table; contains all range types that currently supported
+CREATE TABLE test_sample.sample_ranges (
+      date_range daterange NOT NULL DEFAULT daterange('2024-01-01', '2024-01-10'),
+      timestamp_range tsrange NOT NULL DEFAULT tsrange('2024-01-01 00:00:00', '2024-01-10 00:00:00'),
+      timestampz_range tstzrange NOT NULL DEFAULT tstzrange('2024-01-01 00:00:00 +02', '2024-01-10 00:00:00 +02'),
+      int4_range int4range NOT NULL DEFAULT int4range(0, 10),
+      int8_range int8range NOT NULL DEFAULT int8range(0, 10),
+      num_range numrange NOT NULL DEFAULT numrange(0, 10)
+);
+
+INSERT INTO test_sample.sample_ranges (date_range, timestamp_range, timestampz_range, int4_range, int8_range, num_range)
+    VALUES ('[2023-09-25, 2024-02-10)','[2020-01-01 00:00:00, 2021-01-01 15:00:00]','[2024-05-07 17:00:00 +02,2024-10-11 16:00:00 +02)','[11,20)','[200,2450)','[2000,5000)');
