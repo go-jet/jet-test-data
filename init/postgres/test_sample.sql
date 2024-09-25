@@ -157,6 +157,16 @@ CREATE TABLE IF NOT EXISTS test_sample.link (
     description VARCHAR (255)
 );
 
+COMMENT ON TABLE test_sample.link IS 'Link table';
+
+COMMENT ON COLUMN test_sample.link.id IS 'this is link id';
+
+COMMENT ON COLUMN test_sample.link.url IS 'link url';
+
+COMMENT ON COLUMN test_sample.link.name IS 'Unicode characters comment ₲鬼佬℧⇄↻';
+
+COMMENT ON COLUMN test_sample.link.description IS E'''\"\b\n\r\t\Z\\\%\_';
+
 INSERT INTO test_sample.link (id, url, name, description) VALUES
     (0, 'http://www.youtube.com', 'Youtube' , ''),
     (1, 'www.gmail.com', 'Gmail', 'Email service developed by Google'),
@@ -325,6 +335,8 @@ REFRESH MATERIALIZED VIEW test_sample.all_types_materialized_view;
 
 -- Level enum
 CREATE TYPE test_sample.Level AS ENUM ('1', '2', '3', '4', '5');
+
+COMMENT ON TYPE test_sample.Level IS 'Level enum';
 
 -- Reserved words for table and column names
 CREATE TABLE test_sample."User"(
