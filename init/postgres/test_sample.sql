@@ -187,6 +187,7 @@ CREATE TABLE test_sample.employee (
   last_name VARCHAR (255) NOT NULL,
   employment_date timestamp with time zone,
   manager_id INT,
+  pto_accural interval,
   FOREIGN KEY (manager_id)
       REFERENCES test_sample.employee (employee_id)
       ON DELETE CASCADE
