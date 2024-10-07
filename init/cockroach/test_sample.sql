@@ -250,6 +250,7 @@ CREATE TABLE test_sample.employee (
   last_name VARCHAR (255) NOT NULL,
   employment_date timestamp with time zone,
   manager_id INT4,
+  pto_accrual interval,
   FOREIGN KEY (manager_id)
       REFERENCES test_sample.employee (employee_id)
       ON DELETE CASCADE
@@ -259,17 +260,18 @@ INSERT INTO test_sample.employee (
     first_name,
     last_name,
     employment_date,
-    manager_id
+    manager_id,
+    pto_accrual
 )
 VALUES
-(1, 'Windy', 'Hays', '1999-01-08 04:05:06.100 +1:00', NULL),
-(2, 'Ava', 'Christensen', '1999-01-08 04:05:06 +1:00', 1),
-(3, 'Hassan', 'Conner', '1999-01-08 04:05:06 +1:00', 1),
-(4, 'Anna', 'Reeves', '1999-01-08 04:05:06 +1:00', 2),
-(5, 'Sau', 'Norman', '1999-01-08 04:05:06 +1:00', 2),
-(6, 'Kelsie', 'Hays', '1999-01-08 04:05:06 +1:00', 3),
-(7, 'Tory', 'Goff', '1999-01-08 04:05:06 +1:00', 3),
-(8, 'Salley', 'Lester', '1999-01-08 04:05:06 +1:00', 3);
+(1, 'Windy', 'Hays', '1999-01-08 04:05:06.100 +1:00', NULL, '22h'),
+(2, 'Ava', 'Christensen', '1999-01-08 04:05:06 +1:00', 1, NULL),
+(3, 'Hassan', 'Conner', '1999-01-08 04:05:06 +1:00', 1, '5h'),
+(4, 'Anna', 'Reeves', '1999-01-08 04:05:06 +1:00', 2, '3h42m'),
+(5, 'Sau', 'Norman', '1999-01-08 04:05:06 +1:00', 2, '42days'),
+(6, 'Kelsie', 'Hays', '1999-01-08 04:05:06 +1:00', 3, '1h'),
+(7, 'Tory', 'Goff', '1999-01-08 04:05:06 +1:00', 3, '36m'),
+(8, 'Salley', 'Lester', '1999-01-08 04:05:06 +1:00', 3, NULL);
 
 
 -- Person/Person phone table (UUID used as grouping key) ------------------
