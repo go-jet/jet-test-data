@@ -12,125 +12,126 @@ USE test_sample;
 DROP TABLE IF EXISTS `all_types`;
 
 CREATE TABLE `all_types` (
-     `boolean` BOOLEAN NOT NULL DEFAULT FALSE,
-     `boolean_ptr` BOOLEAN,
+                             `id` INT AUTO_INCREMENT PRIMARY KEY,
+                             `boolean` BOOLEAN NOT NULL DEFAULT FALSE,
+                             `boolean_ptr` BOOLEAN,
 
-     `tiny_int` TINYINT NOT NULL DEFAULT 0,
-     `u_tiny_int` TINYINT unsigned NOT NULL DEFAULT 0,
+                             `tiny_int` TINYINT NOT NULL DEFAULT 0,
+                             `u_tiny_int` TINYINT unsigned NOT NULL DEFAULT 0,
 
-     `small_int` SMALLINT NOT NULL DEFAULT 0,
-     `u_small_int` SMALLINT unsigned NOT NULL DEFAULT 0,
+                             `small_int` SMALLINT NOT NULL DEFAULT 0,
+                             `u_small_int` SMALLINT unsigned NOT NULL DEFAULT 0,
 
-     `medium_int` MEDIUMINT NOT NULL DEFAULT 0,
-     `u_medium_int` MEDIUMINT unsigned NOT NULL DEFAULT 0,
+                             `medium_int` MEDIUMINT NOT NULL DEFAULT 0,
+                             `u_medium_int` MEDIUMINT unsigned NOT NULL DEFAULT 0,
 
-     `integer` INT NOT NULL DEFAULT 0,
-     `u_integer` INT unsigned NOT NULL DEFAULT 0,
+                             `integer` INT NOT NULL DEFAULT 0,
+                             `u_integer` INT unsigned NOT NULL DEFAULT 0,
 
-     `big_int` bigint(20) NOT NULL DEFAULT 0,
-     `u_big_int` bigint(20) unsigned NOT NULL DEFAULT 0,
+                             `big_int` bigint(20) NOT NULL DEFAULT 0,
+                             `u_big_int` bigint(20) unsigned NOT NULL DEFAULT 0,
 
 -- ptr
 
-    `tiny_int_ptr` TINYINT,
-    `u_tiny_int_ptr` TINYINT unsigned,
+                             `tiny_int_ptr` TINYINT,
+                             `u_tiny_int_ptr` TINYINT unsigned,
 
-    `small_int_ptr` SMALLINT,
-    `u_small_int_ptr` SMALLINT unsigned,
+                             `small_int_ptr` SMALLINT,
+                             `u_small_int_ptr` SMALLINT unsigned,
 
-    `medium_int_ptr` MEDIUMINT,
-    `u_medium_int_ptr` MEDIUMINT unsigned,
+                             `medium_int_ptr` MEDIUMINT,
+                             `u_medium_int_ptr` MEDIUMINT unsigned,
 
-    `integer_ptr` INT,
-    `u_integer_ptr` INT unsigned,
+                             `integer_ptr` INT,
+                             `u_integer_ptr` INT unsigned,
 
-    `big_int_ptr` bigint(20),
-    `u_big_int_ptr` bigint(20) unsigned,
+                             `big_int_ptr` bigint(20),
+                             `u_big_int_ptr` bigint(20) unsigned,
 
 
 -- floats
-    `decimal` decimal(5, 2) unsigned NOT NULL DEFAULT 0,
-    `decimal_ptr` decimal(5,2),
+                             `decimal` decimal(5, 2) unsigned NOT NULL DEFAULT 0,
+                             `decimal_ptr` decimal(5,2),
 
-    `numeric` numeric(5,2) NOT NULL DEFAULT 0,
-    `numeric_ptr` numeric(5, 2),
+                             `numeric` numeric(5,2) NOT NULL DEFAULT 0,
+                             `numeric_ptr` numeric(5, 2),
 
-    `float` float NOT NULL DEFAULT 0,
-    `float_ptr` float,
+                             `float` float NOT NULL DEFAULT 0,
+                             `float_ptr` float,
 
-    `double` double NOT NULL DEFAULT 0,
-    `double_ptr` double,
+                             `double` double NOT NULL DEFAULT 0,
+                             `double_ptr` double,
 
-    `real` real NOT NULL DEFAULT 0,
-    `real_ptr` real,
+                             `real` real NOT NULL DEFAULT 0,
+                             `real_ptr` real,
 
 -- bit values
 
-    `bit` bit(10) NOT NULL DEFAULT 0,
-    `bit_ptr` bit(10),
+                             `bit` bit(10) NOT NULL DEFAULT 0,
+                             `bit_ptr` bit(10),
 
 -- date and time
-    `time` time NOT NULL DEFAULT '00:00:00',
-    `time_ptr` time,
+                             `time` time NOT NULL DEFAULT '00:00:00',
+                             `time_ptr` time,
 
-    `date` date NOT NULL DEFAULT '2000-01-01',
-    `date_ptr` date,
+                             `date` date NOT NULL DEFAULT '2000-01-01',
+                             `date_ptr` date,
 
-    `date_time` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
-    `date_time_ptr` datetime,
+                             `date_time` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
+                             `date_time_ptr` datetime,
 
-    `timestamp` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00',
-    `timestamp_ptr` timestamp NULL,
+                             `timestamp` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00',
+                             `timestamp_ptr` timestamp NULL,
 
-    `year` year NOT NULL DEFAULT 2000,
-    `year_ptr` year,
+                             `year` year NOT NULL DEFAULT 2000,
+                             `year_ptr` year,
 
 -- strings
 
-    `char` char(20) NOT NULL DEFAULT 0,
-    `char_ptr` char(20),
+                             `char` char(20) NOT NULL DEFAULT 0,
+                             `char_ptr` char(20),
 
-    `var_char` varchar(20) NOT NULL DEFAULT 0,
-    `var_char_ptr` varchar(20),
+                             `var_char` varchar(20) NOT NULL DEFAULT 0,
+                             `var_char_ptr` varchar(20),
 
-    `binary` binary(20) NOT NULL DEFAULT 0,
-    `binary_ptr` binary(20),
+                             `binary` binary(20) NOT NULL DEFAULT 0,
+                             `binary_ptr` binary(20),
 
-    `var_binary` varbinary(20) NOT NULL DEFAULT 0,
-    `var_binary_ptr` varbinary(20),
+                             `var_binary` varbinary(20) NOT NULL DEFAULT 0,
+                             `var_binary_ptr` varbinary(20),
 
-    `blob` blob NOT NULL,
-    `blob_ptr` blob,
+                             `blob` blob NOT NULL,
+                             `blob_ptr` blob,
 
-    `text` text NOT NULL,
-    `text_ptr` text,
+                             `text` text NOT NULL,
+                             `text_ptr` text,
 
-    `enum` enum('value1', 'value2', 'value3') NOT NULL DEFAULT 'value1',
-    `enum_ptr` enum('value1', 'value2', 'value3'),
+                             `enum` enum('value1', 'value2', 'value3') NOT NULL DEFAULT 'value1',
+                             `enum_ptr` enum('value1', 'value2', 'value3'),
 
-    `set` set('s1', 's2', 's3') NOT NULL DEFAULT 's1',
-    `set_ptr` set('s1', 's2', 's3'),
+                             `set` set('s1', 's2', 's3') NOT NULL DEFAULT 's1',
+                             `set_ptr` set('s1', 's2', 's3'),
 
 -- json
 
-    `json` json NOT NULL,
-    `json_ptr` json
+                             `json` json NOT NULL,
+                             `json_ptr` json
 
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `all_types` VALUES
-    (false, true,
-    -3,3,14,14,-150,150,-1600,1600,5000,50000,
-    -3,3,14,14,-150,150,-1600,1600,50000,50000,
-    1.11,1.11,2.22,2.22,3.33,3.33,4.44,4.44,5.55,5.55,
-    _binary '\0',_binary '\0',
-    '10:11:12.33', '10:11:12.33', '2008-07-04','2008-07-04','2011-12-18 13:17:17','2011-12-18 13:17:17','2007-12-31 23:00:01','2007-12-31 23:00:01',2004,2004,'char','char','varchar','varchar',_binary 'binary\0\0\0\0\0\0\0\0\0\0\0\0\0\0',_binary 'binary\0\0\0\0\0\0\0\0\0\0\0\0\0\0',_binary 'varbinary',_binary 'varbinary',_binary 'blob',_binary 'blob','text','text','value1','value1','s1','s2','{\"key1\": \"value1\", \"key2\": \"value2\"}','{\"key1\": \"value1\", \"key2\": \"value2\"}'),
-    (false, NULL,
-    -3,3,14,14,-150,150,-1600,1600,5000,50000,
-    NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
-    1.11,NULL,2.22,NULL,3.33,NULL,4.44,NULL,5.55,NULL,
-    _binary '\0',NULL,
-    '10:11:12.33', NULL, '2008-07-04',NULL,'2011-12-18 13:17:17',NULL,'2007-12-31 23:00:01',NULL,2004,NULL,'char',NULL,'varchar',NULL,_binary 'binary\0\0\0\0\0\0\0\0\0\0\0\0\0\0',NULL,_binary 'varbinary',NULL,_binary 'blob',NULL,'text',NULL,'value1',NULL,'s1',NULL,'{\"key1\": \"value1\", \"key2\": \"value2\"}',NULL);
+                            (DEFAULT, false, true,
+                             -3,3,14,14,-150,150,-1600,1600,5000,50000,
+                             -3,3,14,14,-150,150,-1600,1600,50000,50000,
+                             1.11,1.11,2.22,2.22,3.33,3.33,4.44,4.44,5.55,5.55,
+                             _binary '\0',_binary '\0',
+                             '10:11:12.33', '10:11:12.33', '2008-07-04','2008-07-04','2011-12-18 13:17:17','2011-12-18 13:17:17','2007-12-31 23:00:01','2007-12-31 23:00:01',2004,2004,'char','char','varchar','varchar',_binary 'binary\0\0\0\0\0\0\0\0\0\0\0\0\0\0',_binary 'binary\0\0\0\0\0\0\0\0\0\0\0\0\0\0',_binary 'varbinary',_binary 'varbinary',_binary 'blob',_binary 'blob','text','text','value1','value1','s1','s2','{\"key1\": \"value1\", \"key2\": \"value2\"}','{\"key1\": \"value1\", \"key2\": \"value2\"}'),
+                            (DEFAULT, false, NULL,
+                             -3,3,14,14,-150,150,-1600,1600,5000,50000,
+                             NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
+                             1.11,NULL,2.22,NULL,3.33,NULL,4.44,NULL,5.55,NULL,
+                             _binary '\0',NULL,
+                             '10:11:12.33', NULL, '2008-07-04',NULL,'2011-12-18 13:17:17',NULL,'2007-12-31 23:00:01',NULL,2004,NULL,'char',NULL,'varchar',NULL,_binary 'binary\0\0\0\0\0\0\0\0\0\0\0\0\0\0',NULL,_binary 'varbinary',NULL,_binary 'blob',NULL,'text',NULL,'value1',NULL,'s1',NULL,'{\"key1\": \"value1\", \"key2\": \"value2\"}',NULL);
 
 
 
@@ -171,7 +172,8 @@ INSERT INTO test_sample.link2 (ID, url, name, description) VALUES
     (0, 'http://www.youtube.com', 'Youtube' , '');
 
 CREATE OR REPLACE VIEW test_sample.all_types_view AS
-SELECT all_types.boolean AS "boolean",
+SELECT all_types.id AS "id",
+       all_types.boolean AS "boolean",
        all_types.boolean_ptr AS "boolean_ptr",
        all_types.tiny_int AS "tiny_int",
        all_types.u_tiny_int AS "u_tiny_int",
