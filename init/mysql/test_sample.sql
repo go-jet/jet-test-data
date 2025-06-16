@@ -286,3 +286,17 @@ CREATE TABLE test_sample.floats (
 INSERT INTO test_sample.floats
 VALUES('1.11111111111111111111', NULL, '2.22222222222222222222', NULL, '3.333333333333333333', NULL,
        '4.44444444444444444444', NULL, '5.55555555555555555555', NULL);
+
+-- Generated column
+CREATE TABLE test_sample.people
+(
+    people_id        serial primary key,
+    people_name      varchar(15) NOT NULL,
+    people_height_cm numeric,
+    people_height_in numeric(10,5) GENERATED ALWAYS AS ((people_height_cm / 2.54)) VIRTUAL
+);
+
+INSERT INTO test_sample.people (people_name, people_height_cm) VALUES
+    ('Alfredo', 170),
+    ('Bob', null),
+    ('Carla', 155);
