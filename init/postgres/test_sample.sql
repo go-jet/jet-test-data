@@ -425,3 +425,62 @@ CREATE TABLE test_sample.sample_ranges (
 
 INSERT INTO test_sample.sample_ranges (date_range, timestamp_range, timestampz_range, int4_range, int8_range, num_range)
     VALUES ('[2023-09-25, 2024-02-10)','[2020-01-01 00:00:00, 2021-01-01 15:00:00]','[2024-05-07 17:00:00 +02,2024-10-11 16:00:00 +02)','[11,20)','[200,2450)','[2000,5000)');
+
+
+--- Array fields table; contains all the array types that are currently supported
+CREATE TABLE test_sample.sample_arrays (
+    id              serial PRIMARY KEY,
+
+    bool_array      bool[],
+
+    int2_array_ptr  int2[] NULL,
+    int4_array      int4[] NOT NULL DEFAULT array[]::int4[],
+    int8_array      int8[] NOT NULL DEFAULT array[]::int8[],
+
+    numeric_array   numeric[] NOT NULL,
+    decimal_array   decimal[] NOT NULL,
+    real_array      real[] NOT NULL,
+    double_array    double precision[] NOT NULL,
+
+    text_array      text[] NOT NULL DEFAULT array[]::text[],
+    varchar_array   varchar[] NOT NULL,
+    char_array      char[] NOT NULL,
+    bytea_array     bytea[] NOT NULL,
+
+    date_array          date[] NOT NULL,
+    timestamp_array     timestamp[],
+    timestamptz_array   timestamptz[] NOT NULL,
+    time_array          time[] NOT NULL,
+    timetz_array        timetz[] NOT NULL,
+    interval_array      interval[] NOT NULL,
+
+    uuid_array          uuid[] NOT NULL,
+    mood_enum_array     test_sample.mood[] NOT NULL
+);
+
+INSERT INTO test_sample.sample_arrays
+VALUES (
+    1,
+    '{true, false, true}',
+    '{1, 2, 3, 4}',
+    '{10, 20, 30, 40}',
+    '{100, 200, 300, 400}',
+    '{1.8881, 2.8882, 3.8883, 4.8884}',
+    '{1.0001, 2.0002, 3.0003, 4.0004}',
+    '{1.01, 2.02, 3.03, 4.04}',
+    '{11.11, 22.22, 33.33}',
+    '{"alpha", "beta", "gama"}',
+    '{"hello", "world"}',
+    '{a, b, c}',
+    ARRAY[E'\\x01020304'::bytea, E'\\x11223344'::bytea],
+
+    '{2024-11-01,2025-02-28}',
+    '{2025-01-01 10:00,2025-02-01 10:00}',
+    '{2025-01-01 10:00+01,2025-02-01 10:00+01}',
+    '{12:00,13:00}',
+    '{12:00+01,13:00+02}',
+    '{1 day, 2 hours}',
+
+    '{550e8400-e29b-41d4-a716-446655440000}',
+    '{happy,ok}'
+);
