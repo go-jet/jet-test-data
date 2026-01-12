@@ -46,7 +46,7 @@ CREATE TABLE `all_types` (
                              `blob_ptr` blob,
 
 -- json
-                             `json` text not null,
+                             `json` text NOT NULL,
                              `json_ptr` text
 );
 
