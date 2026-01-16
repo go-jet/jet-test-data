@@ -43,7 +43,11 @@ CREATE TABLE `all_types` (
                              `text` text NOT NULL,
                              `text_ptr` text,
                              `blob` blob NOT NULL,
-                             `blob_ptr` blob
+                             `blob_ptr` blob,
+
+-- json
+                             `json` text NOT NULL,
+                             `json_ptr` text
 );
 
 INSERT INTO `all_types` VALUES
@@ -52,12 +56,12 @@ INSERT INTO `all_types` VALUES
  1.11,1.01,2.22,2.02,3.33,3.03,4.44,4.04,5.55,5.05,
  '10:11:12.33', '10:11:12.123456', '2008-07-04','2008-07-04','2011-12-18 13:17:17','2011-12-18 13:17:17','2007-12-31 23:00:01','2007-12-31 23:00:01',
  'char1','char-ptr','varchar','varchar-ptr',
- 'text','text-ptr', 'blob1','blob-ptr'),
+ 'text','text-ptr', 'blob1','blob-ptr', '{"key1": "value1", "key2": "value2"}', '{"key1": "value1", "key2": "value2"}'),
 (false, NULL,
  -3,NULL,14,NULL,-150,NULL,-1600,NULL,5000,NULL,
  1.11,NULL,2.22,NULL,3.33,NULL,4.44,NULL,5.55,NULL,
  '10:11:12.33', NULL, '2008-07-04',NULL,'2011-12-18 13:17:17',NULL,'2007-12-31 23:00:01',NULL,
- 'char2',NULL,'varchar',NULL,'text',NULL,'blob2',NULL);
+ 'char2',NULL,'varchar',NULL,'text',NULL,'blob2',NULL, '{"key1": "value1", "key2": "value2"}', NULL);
 
 -- all types view
 
