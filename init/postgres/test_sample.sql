@@ -26,7 +26,7 @@ CREATE TABLE test_sample.all_types
     double_precision_ptr double precision,
     double_precision double precision NOT NULL DEFAULT 0,
     smallserial     smallserial NOT NULL,
-    serial serial NOT NULL,
+    serial serial PRIMARY KEY,
     bigserial bigserial NOT NULL,
 
     --monetary

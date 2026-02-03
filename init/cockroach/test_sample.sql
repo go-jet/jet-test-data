@@ -25,7 +25,7 @@ CREATE TABLE test_sample.all_types
     double_precision_ptr double precision,
     double_precision double precision NOT NULL DEFAULT 0,
     smallserial     smallserial NOT NULL,
-    serial serial NOT NULL,
+    serial serial PRIMARY KEY ,
     bigserial bigserial NOT NULL,
 
     --monetary
@@ -230,6 +230,16 @@ CREATE TABLE IF NOT EXISTS test_sample.link (
     name VARCHAR (255) NOT NULL,
     description VARCHAR (255)
 );
+
+COMMENT ON TABLE test_sample.link IS 'Link table';
+
+COMMENT ON COLUMN test_sample.link.id IS 'this is link id';
+
+COMMENT ON COLUMN test_sample.link.url IS 'link url';
+
+COMMENT ON COLUMN test_sample.link.name IS 'Unicode characters comment ₲鬼佬℧⇄↻';
+
+COMMENT ON COLUMN test_sample.link.description IS E'''\"\b\n\r\t\Z\\\%\_';
 
 INSERT INTO test_sample.link (ID, url, name, description) VALUES
  (0, 'http://www.youtube.com', 'Youtube' , ''),
