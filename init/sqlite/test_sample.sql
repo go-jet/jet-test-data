@@ -115,14 +115,17 @@ VALUES('Column', 'CHECK', 'CEIL', 'COMMIT', 'CREATE', 'DEFAULT', 'DESC', 'EMPTY'
 
 DROP TABLE IF EXISTS exact_decimals;
 CREATE TABLE exact_decimals (
-                                `decimal` TEXT NOT NULL DEFAULT 0,
-                                `decimal_ptr` TEXT,
-                                `numeric` TEXT NOT NULL DEFAULT 0,
-                                `numeric_ptr` TEXT
+    `decimal` DECIMAL(10,2) NOT NULL DEFAULT '0',
+    `decimal_ptr` DECIMAL(10,2),
+    `numeric` NUMERIC NOT NULL DEFAULT '0',
+    `numeric_ptr` NUMERIC
 );
 
 INSERT INTO exact_decimals
-VALUES('1.11111111111111111111', NULL, '2.22222222222222222222', NULL);
+VALUES
+    (1.23, NULL, 2.22222222222, NULL),
+    ('2.333333333333333', '3.44444444', '5.6666666666', '7.88888888'),
+    (25, 34, 356, 67);
 
 
 
